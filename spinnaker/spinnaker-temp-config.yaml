@@ -1,0 +1,55 @@
+gcs:
+  enabled: true
+  bucket: cicd-istio-spinnaker-spinnaker-config
+  project: cicd-istio-spinnaker
+  jsonKey: '{
+  "type": "service_account",
+  "project_id": "cicd-istio-spinnaker",
+  "private_key_id": "f4aa5c31265407f6763fcb874f290dbba1506d24",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4+Jhgg8u0pjWx\nKwpgpHkgis25TdYZssxEt6xeGipTJuKMnep688IrO5NiYauQIejkhvHdyFdDp6jy\nBYEOKpukFxQKJvOMhQF5a+RZqOcyrTC/jdZELfZYrryj41o9vi7hwzdyq+s1AsyF\nLlsSuZoOmk/bwoay64RLLKLTqF6ASEu4rMl3EkUkC/o42vL2RpGK5D8J0JdxdATP\ntTqHJMu84v6ol3waRkivJKyuwJjQR3gxNMSlQqp6pOZKbf1PM7ydkXn2kvJ2bRVz\n/DuxPZLfwsxsNByPn+rD82eFmvwiLLdpIAz7SoQ1poILuYM3/ceSBQYxFovag3hy\nUNTg6yVlAgMBAAECggEARQB314lS9JEMdosX0/WHOhyNohLnS67nhLsAEhqwr1RS\nLyK51iQYywfuc0T8O0hrGNU+ZP3Xj+V7oM1s11wNs6joUOE2+bSkWCdniAr6NG1n\nQg4nYEfFHlARDxJBF8datd2dUanQlHX21bf1QYb7cXcfU1u95AD32RNNqqekmTW7\nA78aXDpxl83G8gnlc+69d7DzSbByQstpCK3Rw4SHvktyaLwC/FgtwkSsR/B2gQ6I\nCbD8OfWty58a505ZQGhb3cjhHFtVBWUzYwtkn0uR5Uv59rQDLxkXpMKYvRObNgl/\nu2fD8WTUvDZUKO46sEi5hvvye/p+8IfTEN9CTkvqAQKBgQD7HhLRB137lf5Xb3Nz\nsUugB4ZI1iOl773Tnvh3BMwRY+wT3KkEOddZeadsOSz+SyWRbf3va3h1fT7Kns2z\nzHf/aF/LlWGRYJ7d6p2iUDLJqbSYMx+c+Qm7N3f7CZOdnGZlceV/ASb6+Asoym3z\nkpTEzjibfL+WJEjpclSlw2IthwKBgQC8kUflYsDgJi997hYpgxfpvS9FViZIwr3G\nbM/r30PVy1xFZD3CWBtk4TEJX9SgCG40P0QskQ7RH3EY7DMLs6NRP4gkm4inG+W/\nff1YmNSoiCwIonvEPyuPZ1lFnmmgxGKS62wnLfvuwi6cnRTnyZAcvIl4MTAk16pv\n6gNa3mQwswKBgHP6Q75+pI1ZjQpc0vmP3NmgIAjrvbMZspZWSXLOqGEvwQy7UOQ+\nwpL0eLqm/XzEwCkWn70/6XZ5zdJO3bo4qQMw9W1VJKa79SORBBS+7XXuBxZ0Jhmd\nez0YNTWgCqk0XqZjoBa0NYibnqvMMlPYUxVCGSrWxrVVNMd8olOclW9pAoGBAJrZ\nSwsp722irflh3L02NBr0Cq+LsWCq2yDpFk2CSLh2iU1KphTEOaq76oLiOT857RXm\npltau6orgbqPrNN9Ly53V5uIRc3E8QQxuCxbRLcpK8/jbnOX1HOs0PiEwAUPgEta\nHLSH5I0K1TAzJom5UijnApS6/+ghWosQxrSGUAxVAoGBAIh1AyY6UsOWyY8ii0it\n2YrH0Y7Ke4LcfdK/b2i3b0DPeLF5S4vfOxEcG+9SdRMLf9jcBZ1fOGhfM5AVAnmJ\nPeXMg3zzyscWLMhi0/cm/yyiivGNBsPpZTX/keCQc/XmgHw31EY4P3PmupPo3G9G\nzyRLQu5XlqIirRg3WEM8I36V\n-----END PRIVATE KEY-----\n",
+  "client_email": "spinnaker-account@cicd-istio-spinnaker.iam.gserviceaccount.com",
+  "client_id": "100538616212772253378",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spinnaker-account%40cicd-istio-spinnaker.iam.gserviceaccount.com"
+}'
+
+dockerRegistries:
+- name: gcr
+  address: https://gcr.io
+  username: _json_key
+  password: '{
+  "type": "service_account",
+  "project_id": "cicd-istio-spinnaker",
+  "private_key_id": "f4aa5c31265407f6763fcb874f290dbba1506d24",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4+Jhgg8u0pjWx\nKwpgpHkgis25TdYZssxEt6xeGipTJuKMnep688IrO5NiYauQIejkhvHdyFdDp6jy\nBYEOKpukFxQKJvOMhQF5a+RZqOcyrTC/jdZELfZYrryj41o9vi7hwzdyq+s1AsyF\nLlsSuZoOmk/bwoay64RLLKLTqF6ASEu4rMl3EkUkC/o42vL2RpGK5D8J0JdxdATP\ntTqHJMu84v6ol3waRkivJKyuwJjQR3gxNMSlQqp6pOZKbf1PM7ydkXn2kvJ2bRVz\n/DuxPZLfwsxsNByPn+rD82eFmvwiLLdpIAz7SoQ1poILuYM3/ceSBQYxFovag3hy\nUNTg6yVlAgMBAAECggEARQB314lS9JEMdosX0/WHOhyNohLnS67nhLsAEhqwr1RS\nLyK51iQYywfuc0T8O0hrGNU+ZP3Xj+V7oM1s11wNs6joUOE2+bSkWCdniAr6NG1n\nQg4nYEfFHlARDxJBF8datd2dUanQlHX21bf1QYb7cXcfU1u95AD32RNNqqekmTW7\nA78aXDpxl83G8gnlc+69d7DzSbByQstpCK3Rw4SHvktyaLwC/FgtwkSsR/B2gQ6I\nCbD8OfWty58a505ZQGhb3cjhHFtVBWUzYwtkn0uR5Uv59rQDLxkXpMKYvRObNgl/\nu2fD8WTUvDZUKO46sEi5hvvye/p+8IfTEN9CTkvqAQKBgQD7HhLRB137lf5Xb3Nz\nsUugB4ZI1iOl773Tnvh3BMwRY+wT3KkEOddZeadsOSz+SyWRbf3va3h1fT7Kns2z\nzHf/aF/LlWGRYJ7d6p2iUDLJqbSYMx+c+Qm7N3f7CZOdnGZlceV/ASb6+Asoym3z\nkpTEzjibfL+WJEjpclSlw2IthwKBgQC8kUflYsDgJi997hYpgxfpvS9FViZIwr3G\nbM/r30PVy1xFZD3CWBtk4TEJX9SgCG40P0QskQ7RH3EY7DMLs6NRP4gkm4inG+W/\nff1YmNSoiCwIonvEPyuPZ1lFnmmgxGKS62wnLfvuwi6cnRTnyZAcvIl4MTAk16pv\n6gNa3mQwswKBgHP6Q75+pI1ZjQpc0vmP3NmgIAjrvbMZspZWSXLOqGEvwQy7UOQ+\nwpL0eLqm/XzEwCkWn70/6XZ5zdJO3bo4qQMw9W1VJKa79SORBBS+7XXuBxZ0Jhmd\nez0YNTWgCqk0XqZjoBa0NYibnqvMMlPYUxVCGSrWxrVVNMd8olOclW9pAoGBAJrZ\nSwsp722irflh3L02NBr0Cq+LsWCq2yDpFk2CSLh2iU1KphTEOaq76oLiOT857RXm\npltau6orgbqPrNN9Ly53V5uIRc3E8QQxuCxbRLcpK8/jbnOX1HOs0PiEwAUPgEta\nHLSH5I0K1TAzJom5UijnApS6/+ghWosQxrSGUAxVAoGBAIh1AyY6UsOWyY8ii0it\n2YrH0Y7Ke4LcfdK/b2i3b0DPeLF5S4vfOxEcG+9SdRMLf9jcBZ1fOGhfM5AVAnmJ\nPeXMg3zzyscWLMhi0/cm/yyiivGNBsPpZTX/keCQc/XmgHw31EY4P3PmupPo3G9G\nzyRLQu5XlqIirRg3WEM8I36V\n-----END PRIVATE KEY-----\n",
+  "client_email": "spinnaker-account@cicd-istio-spinnaker.iam.gserviceaccount.com",
+  "client_id": "100538616212772253378",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spinnaker-account%40cicd-istio-spinnaker.iam.gserviceaccount.com"
+}'
+  email: 1234@5678.com
+
+# Disable minio as the default storage backend
+minio:
+  enabled: false
+
+# Configure Spinnaker to enable GCP services
+halyard:
+  spinnakerVersion: 1.19.4
+  image:
+    repository: us-docker.pkg.dev/spinnaker-community/docker/halyard
+    tag: 1.32.0
+    pullSecrets: []
+  additionalScripts:
+    create: true
+    data:
+      enable_gcs_artifacts.sh: |-
+        $HAL_COMMAND config artifact gcs account add gcs-cicd-istio-spinnaker --json-path /opt/gcs/key.json
+        $HAL_COMMAND config artifact gcs enable
+      enable_pubsub_triggers.sh: |-
+        $HAL_COMMAND config pubsub google enable
+        $HAL_COMMAND config pubsub google subscription add gcr-triggers           --subscription-name gcr-triggers           --json-path /opt/gcs/key.json           --project cicd-istio-spinnaker           --message-format GCR
