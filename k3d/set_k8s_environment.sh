@@ -8,7 +8,7 @@ fi
 
 case $1 in
     # Prevent k3d from deploying traefik to avoid collisions with istio
-    "create" ) k3d cluster create k8senv --servers 1 --agents 2 --port 9443:443@loadbalancer --port 9080:80@loadbalancer --api-port 6443 --k3s-server-arg '--no-deploy=traefik' ; ;;
+    "create" ) k3d cluster create k8senv --servers 1 --agents 2 --port 9443:443@loadbalancer --port 9080:80@loadbalancer --port 15029:15029@loadbalancer --api-port 6443 --k3s-server-arg '--no-deploy=traefik' ; ;;
     "stop" ) k3d cluster stop k8senv; ;;
     "delete" ) k3d cluster delete k8senv ; ;;
     * ) echo "USAGE: ./set_k8s_environment.sh create|stop|delete";

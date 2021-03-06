@@ -3,7 +3,8 @@
 
 function install_istio {
     # We can download an specific version with 
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1
+    #curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1
+    curl -L https://istio.io/downloadIstio | sh -
     cd istio-1.9.1
     echo "$(date) - Checking if namespace istio-system exists, creating it otherwise"
     kubectl get namespace istio-system || kubectl create namespace istio-system 
