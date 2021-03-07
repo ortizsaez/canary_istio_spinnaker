@@ -1,6 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--tag=gcr.io/cicd-istio-spinnaker/webapp', '.']
+  dir: 'python_server/webapp'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/cicd-istio-spinnaker/webapp']
 #- name: 'gcr.io/cloud-builders/docker'
