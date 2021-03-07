@@ -15,7 +15,7 @@ resource "google_service_account" "sa" {
 #}
 
 # Add roles to account
-resource "google_project_iam_binding" "storage" {
+resource "google_project_iam_binding" "project" {
   project = var.project_id
   role    = "roles/storage.admin"
 
@@ -24,33 +24,33 @@ resource "google_project_iam_binding" "storage" {
   ]
 }
 
-resource "google_project_iam_binding" "instanceAdmin" {
-  project = var.project_id
-  role    = "roles/compute.instanceAdmin"
-
-  members = [
-    "serviceAccount:${google_service_account.sa.email}",
-  ]
-}
-
-resource "google_project_iam_binding" "networkAdmin" {
-  project = var.project_id
-  role    = "roles/compute.networkAdmin"
-
-  members = [
-    "serviceAccount:${google_service_account.sa.email}",
-  ]
-}
-
-resource "google_project_iam_binding" "serviceAccountActor" {
-  project = var.project_id
-  role    = "roles/iam.serviceAccountActor"
-
-  members = [
-    "serviceAccount:${google_service_account.sa.email}",
-  ]
-}
-
+#resource "google_project_iam_binding" "instanceAdmin" {
+#  project = var.project_id
+#  role    = "roles/compute.instanceAdmin"
+#
+#  members = [
+#    "serviceAccount:${google_service_account.sa.email}",
+#  ]
+#}
+#
+#resource "google_project_iam_binding" "networkAdmin" {
+#  project = var.project_id
+#  role    = "roles/compute.networkAdmin"
+#
+#  members = [
+#    "serviceAccount:${google_service_account.sa.email}",
+#  ]
+#}
+#
+#resource "google_project_iam_binding" "serviceAccountActor" {
+#  project = var.project_id
+#  role    = "roles/iam.serviceAccountActor"
+#
+#  members = [
+#    "serviceAccount:${google_service_account.sa.email}",
+#  ]
+#}
+#
 
 
 resource "google_pubsub_subscription_iam_binding" "subscriber" {
