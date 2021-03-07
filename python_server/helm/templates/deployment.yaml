@@ -1,19 +1,19 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: webapp-canary
+  name: {{ .Values.name }}-canary
   labels:
-    app: webapp-canary
+    app: {{ .Values.name }}-canary
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapp
+      app: {{ .Values.name }}
   template:
     metadata:
       name: frontend
       labels:
-        app: webapp
+        app: {{ .Values.name }}
         role: frontend
         env: canary
     spec:
