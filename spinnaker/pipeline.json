@@ -53,7 +53,7 @@
           }
         ],
         "isNew": true,
-        "name": "Deploy",
+        "name": "Create helm template",
         "namespace": "default",
         "outputName": "webapp",
         "overrides": {},
@@ -61,6 +61,34 @@
         "requisiteStageRefIds": [],
         "templateRenderer": "HELM3",
         "type": "bakeManifest"
+      },
+      {
+        "account": "default",
+        "cloudProvider": "kubernetes",
+        "isNew": true,
+        "manifestArtifact": null,
+        "manifestArtifactAccount": "embedded-artifact",
+        "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+        "moniker": {
+          "app": "webapp"
+        },
+        "name": "Deploy (Manifest)",
+        "refId": "2",
+        "requisiteStageRefIds": [
+          "1"
+        ],
+        "skipExpressionEvaluation": false,
+        "source": "artifact",
+        "trafficManagement": {
+          "enabled": false,
+          "options": {
+            "enableTraffic": false,
+            "namespace": null,
+            "services": [],
+            "strategy": null
+          }
+        },
+        "type": "deployManifest"
       }
     ],
     "updateTs": "1615127904352"
