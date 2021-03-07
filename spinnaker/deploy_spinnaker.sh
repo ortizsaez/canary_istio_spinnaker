@@ -86,9 +86,14 @@ echo "$(date) - Installing spinnaker using helm"
 helm install -n default spinnaker stable/spinnaker -f spinnaker-temp-config.yaml \
            --version 2.0.0-rc9 --timeout 10m0s --wait
 
-
-export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward --namespace default $DECK_POD 9000 &
-
-export GATE_POD=$(kubectl get pods --namespace default -l "cluster=spin-gate" -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward --namespace default $GATE_POD 8084 &
+echo ".........................."
+echo "$(date) - Install finished. Wait until all the pods are ready and exec the following to access to graphical interface"
+echo 'export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")'
+echo 'kubectl port-forward --namespace default $DECK_POD 9000 &'
+echo 'export GATE_POD=$(kubectl get pods --namespace default -l "cluster=spin-gate" -o jsonpath="{.items[0].metadata.name}")'
+echo 'kubectl port-forward --namespace default $GATE_POD 8084 &'
+#export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
+#kubectl port-forward --namespace default $DECK_POD 9000 &
+#
+#export GATE_POD=$(kubectl get pods --namespace default -l "cluster=spin-gate" -o jsonpath="{.items[0].metadata.name}")
+#kubectl port-forward --namespace default $GATE_POD 8084 &
