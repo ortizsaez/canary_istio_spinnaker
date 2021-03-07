@@ -5,8 +5,8 @@ steps:
   args: ['push', 'gcr.io/cicd-istio-spinnaker/webapp:$TAG_NAME']
 #- name: 'gcr.io/cloud-builders/docker'
 #  args: ['run', 'gcr.io/cicd-istio-spinnaker/webapp', 'go', 'test']
-#- name: 'gcr.io/cloud-builders/gsutil'
-#  args: ['cp', '-r', 'k8s/*', 'gs://cicd-istio-spinnaker-kubernetes-manifests']
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', '-r', 'python_server/helm/*', 'gs://cicd-istio-spinnaker-kubernetes-manifests']
 images: ['gcr.io/cicd-istio-spinnaker/webapp:$TAG_NAME']
 
 
