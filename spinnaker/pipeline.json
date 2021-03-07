@@ -1,0 +1,140 @@
+{
+    "appConfig": {},
+    "expectedArtifacts": [
+      {
+        "defaultArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "default.gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/Chart.yaml",
+          "reference": "gs://cicd-istio-spinnaker-kubernetes-manifests/Chart.yaml",
+          "type": "gcs/object"
+        },
+        "displayName": "gs://cicd-istio-spinnaker-kubernetes-manifests/Chart.yaml",
+        "id": "f07830d8-80ac-4d21-a879-35c1f3592698",
+        "matchArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/Chart.yaml",
+          "type": "gcs/object"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "default.gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/values.yaml",
+          "reference": "gs://cicd-istio-spinnaker-kubernetes-manifests/values.yaml",
+          "type": "gcs/object"
+        },
+        "displayName": "gs://cicd-istio-spinnaker-kubernetes-manifests/values.yaml",
+        "id": "2d48e090-5610-4691-86e5-88c70123367a",
+        "matchArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/values.yaml",
+          "type": "gcs/object"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "default.gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/deployment.yaml",
+          "reference": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/deployment.yaml",
+          "type": "gcs/object"
+        },
+        "displayName": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/deployment.yaml",
+        "id": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
+        "matchArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/deployment.yaml",
+          "type": "gcs/object"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "default.gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/service.yaml",
+          "reference": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/service.yaml",
+          "type": "gcs/object"
+        },
+        "displayName": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/service.yaml",
+        "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
+        "matchArtifact": {
+          "artifactAccount": "gcs-cicd-istio-spinnaker",
+          "kind": "gcs",
+          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/templates/service.yaml",
+          "type": "gcs/object"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "artifactAccount": "docker-registry",
+          "kind": "default.docker",
+          "name": "gcr.io/cicd-istio-spinnaker-kubernetes-manifests/webapp",
+          "reference": "gcr.io/cicd-istio-spinnaker-kubernetes-manifests/webapp:v1.0.2.1",
+          "type": "docker/image",
+          "version": "v1.0.2.1"
+        },
+        "displayName": "gcr.io/cicd-istio-spinnaker-kubernetes-manifests/webapp",
+        "id": "80c8982d-f5df-4d31-b828-5d537d8f67aa",
+        "matchArtifact": {
+          "artifactAccount": "docker-registry",
+          "kind": "docker",
+          "name": "gcr.io/cicd-istio-spinnaker-kubernetes-manifests/webapp",
+          "type": "docker/image"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      }
+    ],
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "anonymous",
+    "limitConcurrent": true,
+    "parallel": true,
+    "stages": [
+      {
+        "account": "default",
+        "cloudProvider": "kubernetes",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": false,
+        "failPipeline": true,
+        "manifestArtifactAccount": "gcs-PROJECT",
+        "manifestArtifactId": "2d48e090-5610-4691-86e5-88c70123367a",
+        "moniker": {
+          "app": "webapp"
+        },
+        "name": "Deploy",
+        "namespace": "default",
+        "outputName": "webapp",
+        "overrides": {},
+        "refId": "1",
+        "relationships": {
+          "loadBalancers": [],
+          "securityGroups": []
+        },
+        "requiredArtifactIds": [
+          "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+        ],
+        "source": "artifact",
+        "templateRenderer": "HELM3",
+        "type": "bakeManifest"
+      }
+    ],
+    "updateTs": "1615123693698"
+  }
