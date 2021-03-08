@@ -33,7 +33,7 @@ spec:
           httpGet:
             path: {{ .Values.deployment.livenessProbe.path }}
             port: {{ .Values.deployment.livenessProbe.port }}
-            initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+          initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
 
 #        env:
 #        - name: COMPONENT

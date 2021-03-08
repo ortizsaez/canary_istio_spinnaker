@@ -14,4 +14,4 @@ spec:
   selector:
     app: {{ .Values.canary.labels.app }}
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
