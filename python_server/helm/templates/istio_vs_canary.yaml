@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3 
+kind: VirtualService 
+metadata: 
+  namespace: {{ .Values.namespace }}
+  name: webapp-canary 
+spec: 
+  hosts: 
+  - "*" 
+  gateways: 
+  - webapp-gateway
+  http: 
+  - match: 
+    - uri: 
+        exact: / 
+#    - uri: 
+#        prefix: /static 
+#    - uri: 
+#        exact: /login 
+#    - uri: 
+#        exact: /logout 
+#    - uri: 
+#        prefix: /api/v1/products 
+    route: 
+    - destination: 
+        host: webapp
+        port: 
+          number: 80
+        subset: {{ .Values.main.labels.env }}
+      weight: {{ sub 100 .Values.percentage_canary }}
+    - destination: 
+        host: webapp
+        port: 
+          number: 80
+        subset: {{ .Values.canary.labels.env }}
+      weight: {{ .Values.percentage_canary }}

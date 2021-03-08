@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.name }}
   labels:
     app: {{ .Values.canary.labels.app }}
-  name: {{ .Values.canary.labels.app }}
 spec:
   ports:
   - name: {{ .Values.service.ports.webapp.name }}
@@ -12,6 +13,5 @@ spec:
     targetPort: {{ .Values.service.ports.webapp.targetPort }}
   selector:
     app: {{ .Values.canary.labels.app }}
-    env: {{ .Values.canary.labels.env }}
   sessionAffinity: None
   type: LoadBalancer
