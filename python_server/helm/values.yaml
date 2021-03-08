@@ -1,1 +1,33 @@
 name: webapp
+canary:
+  image:
+    tag: v1.0.2.18
+  labels:
+    app: webapp-canary
+    env: canary
+
+main:
+  image:
+    tag: v1.0.2.17
+  labels:
+    app: webapp-main
+    env: main
+
+deployment:
+  name: webapp-frontend-main
+  replicas: 1
+  resources:
+    limit:
+      memory: "500Mi"
+      cpu: "100m"
+  readinessProbe:
+    path: /
+    port: 5000
+  
+service:
+  name: webapp-frontend-main
+  ports:
+    webapp:
+      port: 80
+      targetPort: 5000
+      name: webapp

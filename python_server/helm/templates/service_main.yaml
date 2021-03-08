@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.main.labels.app }}
+  name: {{ .Values.main.labels.app }}
+spec:
+  ports:
+  - name: {{ .Values.service.ports.webapp.name }}
+    port: {{ .Values.service.ports.webapp.port }}
+    protocol: TCP
+    targetPort: {{ .Values.service.ports.webapp.targetPort }}
+  selector:
+    app: {{ .Values.main.labels.app }}
+    env: {{ .Values.main.labels.env }}
+  sessionAffinity: None
+  type: LoadBalancer

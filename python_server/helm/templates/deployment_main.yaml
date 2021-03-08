@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Values.main.labels.app }}
+  labels:
+    app: {{ .Values.main.labels.app }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.main.labels.app }}
+  template:
+    metadata:
+      name: frontend
+      labels:
+        app: {{ .Values.main.labels.app }}
+        env: {{ .Values.main.labels.env }}
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/cicd-istio-spinnaker/webapp:{{ .Values.main.image.tag }} # Change tag
+        resources:
+          limits:
+            memory: {{ .Values.deployment.resources.limit.memory }}
+            cpu: {{ .Values.deployment.resources.limit.cpu }}
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.readinessProbe.path }}
+            port: {{ .Values.deployment.readinessProbe.port }}
+#        env:
+#        - name: COMPONENT
+#          value: frontend
+#        - name: BACKEND_URL
+#          value: http://sample-backend-main:8080/metadata
+#        - name: VERSION
+#          value: main
+        ports:
+        - name: frontend
+          containerPort: 5000

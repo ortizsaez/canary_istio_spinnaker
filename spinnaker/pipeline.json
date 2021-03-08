@@ -20,7 +20,26 @@
         "useDefaultArtifact": true,
         "usePriorArtifact": true,
         "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "kind": "default.docker",
+          "name": "gcr.io/cicd-istio-spinnaker/webapp",
+          "reference": "gcr.io/cicd-istio-spinnaker/webapp:v1.0.0",
+          "type": "docker/image",
+          "version": "v1.0.0"
+        },
+        "id": "80c8982d-f5df-4d31-b828-5d537d8f67aa",
+        "matchArtifact": {
+          "kind": "docker",
+          "name": "gcr.io/cicd-istio-spinnaker/webapp",
+          "type": "docker/image"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
       }
+  
     ],
     "keepWaitingPipelines": false,
     "lastModifiedBy": "anonymous",
@@ -48,11 +67,9 @@
         "inputArtifacts": [
           {
             "account": "gcs-cicd-istio-spinnaker",
-            "artifact": null,
             "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
           }
         ],
-        "isNew": true,
         "name": "Create helm template",
         "namespace": "default",
         "outputName": "webapp",
@@ -65,8 +82,6 @@
       {
         "account": "default",
         "cloudProvider": "kubernetes",
-        "isNew": true,
-        "manifestArtifact": null,
         "manifestArtifactAccount": "embedded-artifact",
         "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
         "moniker": {
@@ -83,13 +98,31 @@
           "enabled": false,
           "options": {
             "enableTraffic": false,
-            "namespace": null,
-            "services": [],
-            "strategy": null
+            "services": []
           }
         },
         "type": "deployManifest"
       }
     ],
-    "updateTs": "1615127904352"
+    "triggers": [
+      {
+        "account": "gcr",
+        "attributeConstraints": {},
+        "enabled": true,
+        "expectedArtifactIds": [
+          "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+        ],
+        "organization": "cicd-istio-spinnaker",
+        "payloadConstraints": {
+          "tag": "gcr.io/cicd-istio-spinnaker/webapp:v.*"
+        },
+        "pubsubSystem": "google",
+        "registry": "gcr.io",
+        "repository": "cicd-istio-spinnaker/webapp",
+        "subscriptionName": "gcr-triggers",
+        "tag": "v.*",
+        "type": "pubsub"
+      }
+    ],
+    "updateTs": "1615138231783"
   }
