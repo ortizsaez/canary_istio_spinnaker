@@ -27,6 +27,10 @@ deployment:
   readinessProbe:
     path: /
     port: 5000
+  livenessProbe:
+    path: /
+    port: 5000
+    initialDelaySeconds: 60
   
 service:
   name: webapp-frontend-main
