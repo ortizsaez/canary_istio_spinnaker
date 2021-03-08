@@ -31,6 +31,3 @@ service:
       port: 80
       targetPort: 5000
       name: webapp
-
-labels:
-  role: frontend

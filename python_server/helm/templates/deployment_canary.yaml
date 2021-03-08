@@ -14,7 +14,6 @@ spec:
       name: frontend
       labels:
         app: {{ .Values.canary.labels.app }}
-        role: {{ .Values.labels.role }}
         env: {{ .Values.canary.labels.env }}
     spec:
       containers:

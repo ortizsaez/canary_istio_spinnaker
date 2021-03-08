@@ -11,8 +11,7 @@ spec:
     protocol: TCP
     targetPort: {{ .Values.service.ports.webapp.targetPort }}
   selector:
-    app: {{ .Values.labels.app }}
-    role: {{ .Values.labels.role }}
-    env: {{ .Values.main.env }}
+    app: {{ .Values.main.labels.app }}
+    env: {{ .Values.main.labels.env }}
   sessionAffinity: None
   type: LoadBalancer

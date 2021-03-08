@@ -14,7 +14,6 @@ spec:
       name: frontend
       labels:
         app: {{ .Values.main.labels.app }}
-        role: {{ .Values.labels.role }}
         env: {{ .Values.main.labels.env }}
     spec:
       containers:

@@ -24,6 +24,19 @@ resource "google_project_iam_binding" "project" {
   ]
 }
 
+resource "google_project_iam_binding" "project" {
+  project = var.project_id
+  role    = "roles/pubsub.subscriber"
+
+  members = [
+    "serviceAccount:${google_service_account.sa.email}",
+  ]
+}
+#### FALTA ESTE ROL
+#roles/pubsub.subscriber
+
+
+
 #resource "google_project_iam_binding" "instanceAdmin" {
 #  project = var.project_id
 #  role    = "roles/compute.instanceAdmin"

@@ -11,8 +11,7 @@ spec:
     protocol: TCP
     targetPort: {{ .Values.service.ports.webapp.targetPort }}
   selector:
-    app: {{ .Values.labels.app }}
-    role: {{ .Values.labels.role }}
-    env: {{ .Values.canary.env }}
+    app: {{ .Values.canary.labels.app }}
+    env: {{ .Values.canary.labels.env }}
   sessionAffinity: None
   type: LoadBalancer
