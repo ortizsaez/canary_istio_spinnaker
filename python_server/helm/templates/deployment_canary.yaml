@@ -1,7 +1,8 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: {{ .Values.canary.labels.app }}
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.canary.name }}
   labels:
     app: {{ .Values.canary.labels.app }}
 spec:
@@ -28,6 +29,12 @@ spec:
           httpGet:
             path: {{ .Values.deployment.readinessProbe.path }}
             port: {{ .Values.deployment.readinessProbe.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deployment.livenessProbe.path }}
+            port: {{ .Values.deployment.livenessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+
 #        env:
 #        - name: COMPONENT
 #          value: frontend
