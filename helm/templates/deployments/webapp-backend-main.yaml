@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webapp-backend-production
+  labels:
+    app: webapp
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name: backend
+      labels:
+        app: webapp
+        role: backend
+        env: production
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/{{ .Values.project }}/webapp:{{ .Values.main.image.tag }}
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        env:
+        - name: COMPONENT
+          value: backend
+        - name: VERSION
+          value: production
+        ports:
+        - name: backend
+          containerPort: 8080

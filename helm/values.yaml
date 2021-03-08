@@ -1,0 +1,42 @@
+name: webapp
+project: cicd-istio-spinnaker
+namespace: tst # This value will be overwritten by spinnaker to deploy in prod
+percentage_canary: 20 # This value will be overwritten by spinnaker to modify the %
+canary:
+  name: webapp-canary
+  image:
+    tag: v1.1.0
+  labels:
+    app: webapp
+    env: canary
+
+main:
+  name: webapp-main
+  image:
+    tag: v1.1.0
+  labels:
+    app: webapp
+    env: main
+
+deployment:
+  name: webapp-frontend-main
+  replicas: 1
+  resources:
+    limit:
+      memory: "500Mi"
+      cpu: "100m"
+  readinessProbe:
+    path: /
+    port: 5000
+  livenessProbe:
+    path: /
+    port: 5000
+    initialDelaySeconds: 60
+  
+service:
+  name: webapp-frontend-main
+  ports:
+    webapp:
+      port: 80
+      targetPort: 5000
+      name: webapp
