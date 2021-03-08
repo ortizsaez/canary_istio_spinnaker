@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/cicd-istio-spinnaker/webapp:v1.0.2.14 # Change tag
+        image: gcr.io/cicd-istio-spinnaker/webapp:{{ .Values.image.tag }} # Change tag
         resources:
           limits:
             memory: "500Mi"
