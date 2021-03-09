@@ -1,11 +1,10 @@
 #!/bin/sh
-# Configure k8s environment using k3d. https://k3d.io/
 
 function install_istio {
     # We can download an specific version with 
     #curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1
-    curl -L https://istio.io/downloadIstio | sh -
-    cd istio-1.9.1
+    #curl -L https://istio.io/downloadIstio | sh -
+    #cd istio-1.9.1
     echo "$(date) - Checking if namespace istio-system exists, creating it otherwise"
     kubectl get namespace istio-system || kubectl create namespace istio-system 
     echo ".................................."
@@ -21,6 +20,15 @@ function install_istio {
     #echo "$(date) - Installing istio egress"
     #helm upgrade --install istio-egress manifests/charts/gateways/istio-ingress -n istio-system
 
+    # Installing kiali
+    echo "$(date) - Installing kiali"
+    kubectl apply -f istio-1.9.1/samples/addons/kiali.yaml
+    # Installing prometheus
+    echo "$(date) - Installing prometheus"
+    kubectl apply -f istio-1.9.1/samples/addons/prometheus.yaml
+    # Installing Grafana
+    echo "$(date) - Installing prometheus"
+    kubectl apply -f istio-1.9.1/samples/addons/grafana.yaml
 }
 
 function uninstall_istio {
@@ -42,7 +50,6 @@ if [ $# -lt 1 ]; then
 fi
 
 case $1 in
-    # Prevent k3d from deploying traefik to avoid collisions with istio
     "install" ) install_istio ; ;;
     "uninstall" ) uninstall_istio; ;;
 

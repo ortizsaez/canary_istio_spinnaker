@@ -16,7 +16,7 @@ blue:
   name: webapp-blue
   image:
     name: webapp
-    tag: v1.1.0
+    tag: v1.2.0 # New fabulous blue font
   labels:
     app: webapp
     env: blue
@@ -29,7 +29,7 @@ green:
   name: webapp-green
   image:
     name: webapp
-    tag: v1.1.0
+    tag: v1.1.0 # Yellow font
   labels:
     app: webapp
     env: green

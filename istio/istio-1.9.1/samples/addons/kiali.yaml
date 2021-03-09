@@ -427,6 +427,7 @@ metadata:
     kiali.io/api-spec: https://kiali.io/api
     kiali.io/api-type: rest
 spec:
+  type: LoadBalancer
   ports:
   - name: http
     protocol: TCP

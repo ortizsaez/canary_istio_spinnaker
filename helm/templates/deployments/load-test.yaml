@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: tst
+  name: load-test
+  labels:
+    app: load-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-test
+  template:
+    metadata:
+      name: load-test
+      labels:
+        app: load-test
+    spec:
+      containers:
+      - name: load-test
+        image: fortio/fortio
+#        args:
+#          - "load -c 32 -qps 25 -t 10s http://webapp-test.gke.com"
+#        command:
+#          - "/bin/sh"
+#          - "-c"
+#          - "load -c 32 -qps 25 -t 10s http://webapp-test.gke.com"
+        imagePullPolicy: Always
+      hostAliases:
+        - ip: "34.121.25.94"
+          hostnames:
+          - "webapp-test.gke.com"
+#        ports:
+#        - name: backend
+#          containerPort: 8080
