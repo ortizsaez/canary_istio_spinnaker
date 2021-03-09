@@ -167,6 +167,290 @@
         }
       },
       "type": "deployManifest"
+    },
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
+            "type": "embedded/base64"
+          },
+          "displayName": "webapp-test-manifest-100",
+          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+          "matchArtifact": {
+            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
+            "name": "webapp-test-manifest-100",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifacts": [
+        {
+          "account": "gcs-cicd-istio-spinnaker",
+          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
+        }
+      ],
+      "name": "Template Test blue 100%",
+      "namespace": "default",
+      "outputName": "webapp",
+      "overrides": {
+        "frontend_percentage_blue": "100",
+        "namespace": "tst"
+      },
+      "refId": "5",
+      "requisiteStageRefIds": [
+        "4"
+      ],
+      "templateRenderer": "HELM3",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "embedded-artifact",
+      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+      "moniker": {
+        "app": "webapp"
+      },
+      "name": "Deploy Test blue 100%",
+      "refId": "6",
+      "requisiteStageRefIds": [
+        "5"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "failPipeline": true,
+      "instructions": "Is everything ready to go to production?",
+      "judgmentInputs": [],
+      "name": "Deploy to prod?",
+      "notifications": [],
+      "refId": "7",
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "type": "manualJudgment"
+    },
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
+            "type": "embedded/base64"
+          },
+          "displayName": "webapp-prod-manifest-10",
+          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+          "matchArtifact": {
+            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
+            "name": "webapp-prod-manifest-10",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifacts": [
+        {
+          "account": "gcs-cicd-istio-spinnaker",
+          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
+        }
+      ],
+      "name": "Template PROD blue 10%",
+      "namespace": "default",
+      "outputName": "webapp",
+      "overrides": {
+        "frontend_percentage_blue": "10",
+        "namespace": "prod"
+      },
+      "refId": "8",
+      "requisiteStageRefIds": [
+        "7"
+      ],
+      "templateRenderer": "HELM3",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "embedded-artifact",
+      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+      "moniker": {
+        "app": "webapp"
+      },
+      "name": "Deploy PROD blue 10%",
+      "refId": "9",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "failPipeline": true,
+      "instructions": "Is everything ready to increase traffic to 50% to blue environment?",
+      "judgmentInputs": [],
+      "name": "Increase percentage to 50% to blue environment?",
+      "notifications": [],
+      "refId": "10",
+      "requisiteStageRefIds": [
+        "9"
+      ],
+      "type": "manualJudgment"
+    },
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
+            "type": "embedded/base64"
+          },
+          "displayName": "webapp-prod-manifest-50",
+          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+          "matchArtifact": {
+            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
+            "name": "webapp-prod-manifest-50",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifacts": [
+        {
+          "account": "gcs-cicd-istio-spinnaker",
+          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
+        }
+      ],
+      "name": "Template PROD blue 50%",
+      "namespace": "default",
+      "outputName": "webapp",
+      "overrides": {
+        "frontend_percentage_blue": "50",
+        "namespace": "prod"
+      },
+      "refId": "11",
+      "requisiteStageRefIds": [
+        "10"
+      ],
+      "templateRenderer": "HELM3",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "embedded-artifact",
+      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+      "moniker": {
+        "app": "webapp"
+      },
+      "name": "Deploy PROD blue 50%",
+      "refId": "12",
+      "requisiteStageRefIds": [
+        "11"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "failPipeline": true,
+      "instructions": "Is everything ready to increase traffic to 100% to blue environment?",
+      "judgmentInputs": [],
+      "name": "Increase percentage to 100% to blue environment?",
+      "notifications": [],
+      "refId": "13",
+      "requisiteStageRefIds": [
+        "12"
+      ],
+      "type": "manualJudgment"
+    },
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
+            "type": "embedded/base64"
+          },
+          "displayName": "webapp-prod-manifest-100",
+          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+          "matchArtifact": {
+            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
+            "name": "webapp-prod-manifest-100",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifacts": [
+        {
+          "account": "gcs-cicd-istio-spinnaker",
+          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
+        }
+      ],
+      "name": "Template PROD blue 100%",
+      "namespace": "default",
+      "outputName": "webapp",
+      "overrides": {
+        "frontend_percentage_blue": "100",
+        "namespace": "prod"
+      },
+      "refId": "14",
+      "requisiteStageRefIds": [
+        "13"
+      ],
+      "templateRenderer": "HELM3",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "embedded-artifact",
+      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+      "moniker": {
+        "app": "webapp"
+      },
+      "name": "Deploy PROD blue 100%",
+      "refId": "15",
+      "requisiteStageRefIds": [
+        "14"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
     }
   ],
   "triggers": [
@@ -189,5 +473,5 @@
       "type": "pubsub"
     }
   ],
-  "updateTs": "1615302836289"
+  "updateTs": "1615305182016"
 }
