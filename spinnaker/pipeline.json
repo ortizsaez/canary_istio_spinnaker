@@ -1,128 +1,193 @@
 {
-    "appConfig": {},
-    "expectedArtifacts": [
-      {
-        "defaultArtifact": {
-          "artifactAccount": "gcs-cicd-istio-spinnaker",
-          "kind": "default.gcs",
-          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
-          "reference": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
-          "type": "gcs/object"
-        },
-        "displayName": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
-        "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a",
-        "matchArtifact": {
-          "artifactAccount": "gcs-cicd-istio-spinnaker",
-          "kind": "gcs",
-          "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
-          "type": "gcs/object"
-        },
-        "useDefaultArtifact": true,
-        "usePriorArtifact": true,
-        "usePriorExecution": false
+  "appConfig": {},
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "artifactAccount": "gcs-cicd-istio-spinnaker",
+        "kind": "default.gcs",
+        "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
+        "reference": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
+        "type": "gcs/object"
       },
-      {
-        "defaultArtifact": {
-          "kind": "default.docker",
-          "name": "gcr.io/cicd-istio-spinnaker/webapp",
-          "reference": "gcr.io/cicd-istio-spinnaker/webapp:v1.0.0",
-          "type": "docker/image",
-          "version": "v1.0.0"
-        },
-        "id": "80c8982d-f5df-4d31-b828-5d537d8f67aa",
-        "matchArtifact": {
-          "kind": "docker",
-          "name": "gcr.io/cicd-istio-spinnaker/webapp",
-          "type": "docker/image"
-        },
-        "useDefaultArtifact": true,
-        "usePriorArtifact": true,
-        "usePriorExecution": false
-      }
-  
-    ],
-    "keepWaitingPipelines": false,
-    "lastModifiedBy": "anonymous",
-    "limitConcurrent": true,
-    "parallel": true,
-    "stages": [
-      {
-        "expectedArtifacts": [
-          {
-            "defaultArtifact": {
-              "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
-              "type": "embedded/base64"
-            },
-            "displayName": "webapp-result",
-            "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
-            "matchArtifact": {
-              "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
-              "name": "webapp-result",
-              "type": "embedded/base64"
-            },
-            "useDefaultArtifact": false,
-            "usePriorArtifact": false
-          }
-        ],
-        "inputArtifacts": [
-          {
-            "account": "gcs-cicd-istio-spinnaker",
-            "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
-          }
-        ],
-        "name": "Create helm template",
-        "namespace": "default",
-        "outputName": "webapp",
-        "overrides": {},
-        "refId": "1",
-        "requisiteStageRefIds": [],
-        "templateRenderer": "HELM3",
-        "type": "bakeManifest"
+      "displayName": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
+      "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a",
+      "matchArtifact": {
+        "artifactAccount": "gcs-cicd-istio-spinnaker",
+        "kind": "gcs",
+        "name": "gs://cicd-istio-spinnaker-kubernetes-manifests/webapp-1.0.0.tgz",
+        "type": "gcs/object"
       },
-      {
-        "account": "default",
-        "cloudProvider": "kubernetes",
-        "manifestArtifactAccount": "embedded-artifact",
-        "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
-        "moniker": {
-          "app": "webapp"
-        },
-        "name": "Deploy (Manifest)",
-        "refId": "2",
-        "requisiteStageRefIds": [
-          "1"
-        ],
-        "skipExpressionEvaluation": false,
-        "source": "artifact",
-        "trafficManagement": {
-          "enabled": false,
-          "options": {
-            "enableTraffic": false,
-            "services": []
-          }
-        },
-        "type": "deployManifest"
-      }
-    ],
-    "triggers": [
-      {
-        "account": "gcr",
-        "attributeConstraints": {},
-        "enabled": true,
-        "expectedArtifactIds": [
-          "80c8982d-f5df-4d31-b828-5d537d8f67aa"
-        ],
-        "organization": "cicd-istio-spinnaker",
-        "payloadConstraints": {
-          "tag": "gcr.io/cicd-istio-spinnaker/webapp:v.*"
-        },
-        "pubsubSystem": "google",
-        "registry": "gcr.io",
-        "repository": "cicd-istio-spinnaker/webapp",
-        "subscriptionName": "gcr-triggers",
-        "tag": "v.*",
-        "type": "pubsub"
-      }
-    ],
-    "updateTs": "1615138231783"
-  }
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.docker",
+        "name": "gcr.io/cicd-istio-spinnaker/webapp",
+        "reference": "gcr.io/cicd-istio-spinnaker/webapp:v1.0.0",
+        "type": "docker/image",
+        "version": "v1.0.0"
+      },
+      "displayName": "gcr.io/cicd-istio-spinnaker/webapp",
+      "id": "80c8982d-f5df-4d31-b828-5d537d8f67aa",
+      "matchArtifact": {
+        "kind": "docker",
+        "name": "gcr.io/cicd-istio-spinnaker/webapp",
+        "type": "docker/image"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    }
+  ],
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "parallel": true,
+  "stages": [
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
+            "type": "embedded/base64"
+          },
+          "displayName": "webapp-test-manifest-10",
+          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+          "matchArtifact": {
+            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
+            "name": "webapp-test-manifest-10",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifacts": [
+        {
+          "account": "gcs-cicd-istio-spinnaker",
+          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
+        }
+      ],
+      "name": "Template Test blue 10%",
+      "namespace": "default",
+      "outputName": "webapp",
+      "overrides": {
+        "frontend_percentage_blue": "10",
+        "namespace": "tst"
+      },
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "templateRenderer": "HELM3",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "embedded-artifact",
+      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+      "moniker": {
+        "app": "webapp"
+      },
+      "name": "Deploy Test blue 10%",
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "1"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
+            "type": "embedded/base64"
+          },
+          "displayName": "webapp-test-manifest-50",
+          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+          "matchArtifact": {
+            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
+            "name": "webapp-test-manifest-50",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifacts": [
+        {
+          "account": "gcs-cicd-istio-spinnaker",
+          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
+        }
+      ],
+      "name": "Template Test blue 50%",
+      "namespace": "default",
+      "outputName": "webapp",
+      "overrides": {
+        "frontend_percentage_blue": "50",
+        "namespace": "tst"
+      },
+      "refId": "3",
+      "requisiteStageRefIds": [
+        "2"
+      ],
+      "templateRenderer": "HELM3",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "embedded-artifact",
+      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
+      "moniker": {
+        "app": "webapp"
+      },
+      "name": "Deploy Test blue 50%",
+      "refId": "4",
+      "requisiteStageRefIds": [
+        "3"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    }
+  ],
+  "triggers": [
+    {
+      "account": "gcr",
+      "attributeConstraints": {},
+      "enabled": true,
+      "expectedArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "organization": "cicd-istio-spinnaker",
+      "payloadConstraints": {
+        "tag": "gcr.io/cicd-istio-spinnaker/webapp:v.*"
+      },
+      "pubsubSystem": "google",
+      "registry": "gcr.io",
+      "repository": "cicd-istio-spinnaker/webapp",
+      "subscriptionName": "gcr-triggers",
+      "tag": "v.*",
+      "type": "pubsub"
+    }
+  ],
+  "updateTs": "1615302836289"
+}
