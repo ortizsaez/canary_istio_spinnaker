@@ -1,0 +1,45 @@
+apiVersion: networking.istio.io/v1alpha3 
+kind: VirtualService 
+metadata: 
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.service.webapp_frontend.name }}
+spec: 
+  hosts: 
+  - "*" 
+  gateways: 
+  - {{ .Values.gateway.name }}
+  http: 
+    # Fix each user that has seen blue to blue environment with cookie
+    - route: 
+        - destination: 
+           host: {{ .Values.service.webapp_frontend.name }}
+           subset: {{ .Values.blue.labels.env }} 
+           port: 
+             number: {{ .Values.service.webapp_frontend.ports.webapp.port }} 
+      match: 
+        - headers:
+            cookie: 
+              regex: "^(.*?;)?(environment={{ .Values.blue.labels.env}})(;.*)?$" 
+    # Set a cookie for each environment to show new version from the first time in advance
+    - route: 
+      - headers:
+          response:
+            add:
+              set-cookie: environment={{ .Values.blue.labels.env}};max-age=86400
+        destination:
+          host: {{ .Values.service.webapp_frontend.name }}
+          port: 
+            number: {{ .Values.service.webapp_frontend.ports.webapp.port }}
+          subset: {{ .Values.blue.labels.env }}
+        weight: {{ .Values.frontend_percentage_blue }}
+
+      - headers:
+          response:
+            add: 
+              set-cookie: environment={{ .Values.green.labels.env}}
+        destination: 
+          host: {{ .Values.service.webapp_frontend.name }}
+          port: 
+            number: {{ .Values.service.webapp_frontend.ports.webapp.port }}
+          subset: {{ .Values.green.labels.env }}
+        weight: {{ sub 100 .Values.frontend_percentage_blue }}

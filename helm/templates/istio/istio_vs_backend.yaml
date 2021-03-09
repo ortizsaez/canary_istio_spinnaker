@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3 
+kind: VirtualService 
+metadata: 
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.service.webapp_backend.name }} 
+spec: 
+  hosts: 
+  - {{ .Values.service.webapp_backend.name }} 
+  http: 
+#  - match: 
+#    - uri: 
+#        exact: / 
+    - route: 
+      - destination: 
+          host: {{ .Values.service.webapp_backend.name }}
+          port: 
+            number: {{ .Values.service.webapp_backend.ports.webapp.port }}
+          subset: {{ .Values.blue.labels.env }}
+        weight: {{ sub 100 .Values.backend_percentage_blue }}
+      - destination: 
+          host: {{ .Values.service.webapp_backend.name }}
+          port: 
+            number: {{ .Values.service.webapp_backend.ports.webapp.port }}
+          subset: {{ .Values.green.labels.env }}
+        weight: {{ .Values.backend_percentage_blue }}

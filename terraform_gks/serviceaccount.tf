@@ -32,8 +32,7 @@ resource "google_project_iam_binding" "project" {
     "serviceAccount:${google_service_account.sa.email}",
   ]
 }
-#### FALTA ESTE ROL
-#roles/pubsub.subscriber
+
 
 
 

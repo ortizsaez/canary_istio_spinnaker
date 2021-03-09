@@ -1,0 +1,90 @@
+name: webapp
+project: cicd-istio-spinnaker
+namespace: tst # This value will be overwritten by spinnaker to deploy in prod
+frontend_percentage_blue: 20 # This value will be overwritten by spinnaker to modify the %
+backend_percentage_blue: 100 # This value will be overwritten by spinnaker to modify the %
+
+blue:
+  frontend_replicas: 1
+  backend_replicas: 1
+  frontend_deployment_name: webapp-frontend-blue
+  backend_deployment_name: webapp-backend-blue
+  name: webapp-blue
+  image:
+    name: webapp
+    tag: v1.1.0
+  labels:
+    app: webapp
+    env: blue
+
+green:
+  frontend_replicas: 1
+  backend_replicas: 1
+  frontend_deployment_name: webapp-frontend-green
+  backend_deployment_name: webapp-backend-green
+  name: webapp-green
+  image:
+    name: webapp
+    tag: v1.1.0
+  labels:
+    app: webapp
+    env: green
+
+gateway:
+  name: webapp-gateway
+  port:
+    http:
+      number: 80
+      name: http
+      protocol: HTTP
+# Common properties for deployment
+deployment: 
+  webapp_frontend:
+    name: webapp-frontend
+    resources:
+      limit:
+        memory: "500Mi"
+        cpu: "100m"
+    readinessProbe:
+      path: /health
+      port: 8080
+    livenessProbe:
+      path: /health
+      port: 8080
+      initialDelaySeconds: 60
+  webapp_backend:
+    name: webapp-backend
+    resources:
+      limit:
+        memory: "500Mi"
+        cpu: "100m"
+    readinessProbe:
+      path: /health
+      port: 8080
+    livenessProbe:
+      path: /health
+      port: 8080
+      initialDelaySeconds: 60  
+service:
+  webapp_frontend:
+    name: webapp-frontend
+    ports:
+      webapp:
+        port: 80
+        targetPort: 8080
+        name: webapp
+    type: LoadBalancer
+    selector:
+      app: webapp
+      role: frontend
+  webapp_backend:
+    name: webapp-backend
+    ports:
+      webapp:
+        port: 8080
+        targetPort: 8080
+        name: webapp
+    selector:
+      app: webapp
+      role: backend
+    type: ClusterIP
