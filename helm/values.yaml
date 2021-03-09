@@ -3,6 +3,10 @@ project: cicd-istio-spinnaker
 namespace: tst # This value will be overwritten by spinnaker to deploy in prod
 frontend_percentage_blue: 20 # This value will be overwritten by spinnaker to modify the %
 backend_percentage_blue: 100 # This value will be overwritten by spinnaker to modify the %
+test_url: webapp-test.gke.com
+test_credential: webapp-test-credential
+prod_url: webapp.gke.com
+prod_credential: webapp-credential
 
 blue:
   frontend_replicas: 1
@@ -33,6 +37,10 @@ green:
 gateway:
   name: webapp-gateway
   port:
+    https:
+      number: 443
+      name: https
+      protocol: HTTPS
     http:
       number: 80
       name: http
@@ -73,7 +81,7 @@ service:
         port: 80
         targetPort: 8080
         name: webapp
-    type: LoadBalancer
+    type: ClusterIP
     selector:
       app: webapp
       role: frontend
