@@ -7,19 +7,27 @@ spec:
   hosts: 
   - {{ .Values.service.webapp_backend.name }} 
   http: 
-#  - match: 
-#    - uri: 
-#        exact: / 
+    # Fix each user that has seen blue to blue environment with cookie
+    - route: 
+        - destination: 
+           host: {{ .Values.service.webapp_backend.name }}
+           subset: {{ .Values.blue.labels.env }} 
+           port: 
+             number: {{ .Values.service.webapp_backend.ports.webapp.port }} 
+      match: 
+        - headers:
+            cookie: 
+              regex: "^(.*?;)?(environment={{ .Values.blue.labels.env}})(;.*)?$" 
     - route: 
       - destination: 
           host: {{ .Values.service.webapp_backend.name }}
           port: 
             number: {{ .Values.service.webapp_backend.ports.webapp.port }}
           subset: {{ .Values.blue.labels.env }}
-        weight: {{ sub 100 .Values.percentage_blue }}
+        weight: {{ .Values.percentage_blue }}
       - destination: 
           host: {{ .Values.service.webapp_backend.name }}
           port: 
             number: {{ .Values.service.webapp_backend.ports.webapp.port }}
           subset: {{ .Values.green.labels.env }}
-        weight: {{ .Values.percentage_blue }}
+        weight: {{ sub 100 .Values.percentage_blue }}
