@@ -53,66 +53,6 @@
             "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
             "type": "embedded/base64"
           },
-          "displayName": "webapp-test-manifest-10",
-          "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
-          "matchArtifact": {
-            "id": "0ce7e4ff-7ef9-44db-a350-b8c80a003193",
-            "name": "webapp-test-manifest-10",
-            "type": "embedded/base64"
-          },
-          "useDefaultArtifact": false,
-          "usePriorArtifact": false
-        }
-      ],
-      "inputArtifacts": [
-        {
-          "account": "gcs-cicd-istio-spinnaker",
-          "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1a"
-        }
-      ],
-      "name": "Template Test blue 10%",
-      "namespace": "default",
-      "outputName": "webapp",
-      "overrides": {
-        "frontend_percentage_blue": "10",
-        "namespace": "tst"
-      },
-      "refId": "1",
-      "requisiteStageRefIds": [],
-      "templateRenderer": "HELM3",
-      "type": "bakeManifest"
-    },
-    {
-      "account": "default",
-      "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "embedded-artifact",
-      "manifestArtifactId": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
-      "moniker": {
-        "app": "webapp"
-      },
-      "name": "Deploy Test blue 10%",
-      "refId": "2",
-      "requisiteStageRefIds": [
-        "1"
-      ],
-      "skipExpressionEvaluation": false,
-      "source": "artifact",
-      "trafficManagement": {
-        "enabled": false,
-        "options": {
-          "enableTraffic": false,
-          "services": []
-        }
-      },
-      "type": "deployManifest"
-    },
-    {
-      "expectedArtifacts": [
-        {
-          "defaultArtifact": {
-            "id": "65686ec1-428f-4e48-a77b-80fa1352b1bd",
-            "type": "embedded/base64"
-          },
           "displayName": "webapp-test-manifest-50",
           "id": "c90e10c2-21c8-443a-b4d7-d602aeda4f58",
           "matchArtifact": {
@@ -134,13 +74,11 @@
       "namespace": "default",
       "outputName": "webapp",
       "overrides": {
-        "frontend_percentage_blue": "50",
-        "namespace": "tst"
+        "namespace": "tst",
+        "percentage_blue": "50"
       },
       "refId": "3",
-      "requisiteStageRefIds": [
-        "2"
-      ],
+      "requisiteStageRefIds": [],
       "templateRenderer": "HELM3",
       "type": "bakeManifest"
     },
@@ -196,12 +134,12 @@
       "namespace": "default",
       "outputName": "webapp",
       "overrides": {
-        "frontend_percentage_blue": "100",
-        "namespace": "tst"
+        "namespace": "tst",
+        "percentage_blue": "100"
       },
       "refId": "5",
       "requisiteStageRefIds": [
-        "4"
+        "16"
       ],
       "templateRenderer": "HELM3",
       "type": "bakeManifest"
@@ -270,8 +208,8 @@
       "namespace": "default",
       "outputName": "webapp",
       "overrides": {
-        "frontend_percentage_blue": "10",
-        "namespace": "prod"
+        "namespace": "prod",
+        "percentage_blue": "10"
       },
       "refId": "8",
       "requisiteStageRefIds": [
@@ -344,8 +282,8 @@
       "namespace": "default",
       "outputName": "webapp",
       "overrides": {
-        "frontend_percentage_blue": "50",
-        "namespace": "prod"
+        "namespace": "prod",
+        "percentage_blue": "50"
       },
       "refId": "11",
       "requisiteStageRefIds": [
@@ -418,8 +356,8 @@
       "namespace": "default",
       "outputName": "webapp",
       "overrides": {
-        "frontend_percentage_blue": "100",
-        "namespace": "prod"
+        "namespace": "prod",
+        "percentage_blue": "100"
       },
       "refId": "14",
       "requisiteStageRefIds": [
@@ -451,6 +389,18 @@
         }
       },
       "type": "deployManifest"
+    },
+    {
+      "failPipeline": true,
+      "instructions": "Is everything ready to increase traffic to 100% to blue environment?",
+      "judgmentInputs": [],
+      "name": "Increase pertentage to 100% to blue environment",
+      "notifications": [],
+      "refId": "16",
+      "requisiteStageRefIds": [
+        "4"
+      ],
+      "type": "manualJudgment"
     }
   ],
   "triggers": [
@@ -473,5 +423,5 @@
       "type": "pubsub"
     }
   ],
-  "updateTs": "1615305182016"
+  "updateTs": "1615313200099"
 }
