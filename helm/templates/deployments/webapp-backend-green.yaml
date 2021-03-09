@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.green.backend_deployment_name }}
+  labels:
+    app: {{ .Values.green.labels.app }}
+spec:
+  replicas: {{ .Values.green.backend_replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.green.labels.app }}
+  template:
+    metadata:
+      name: {{ .Values.green.backend_deployment_name }}
+      labels:
+        app: {{ .Values.green.labels.app }}
+        role: backend
+        env: {{ .Values.green.labels.env }}
+    spec:
+      containers:
+      - name: {{ .Values.green.backend_deployment_name }}
+        image: gcr.io/{{ .Values.project }}/{{ .Values.green.image.name }}:{{ .Values.green.image.tag }}
+        resources:
+          limits:
+            memory: {{ .Values.deployment.webapp_backend.resources.limit.memory }}
+            cpu: {{ .Values.deployment.webapp_backend.resources.limit.cpu }}
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.webapp_backend.readinessProbe.path }}
+            port: {{ .Values.deployment.webapp_backend.readinessProbe.port }}
+        env:
+        - name: COMPONENT
+          value: backend
+        - name: VERSION
+          value: green
+#        ports:
+#        - name: backend
+#          containerPort: 8080

@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.blue.frontend_deployment_name }}
+  labels:
+    app: {{ .Values.blue.labels.app }}
+spec:
+  replicas: {{ .Values.blue.frontend_replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.blue.labels.app }}
+  template:
+    metadata:
+      name: {{ .Values.blue.frontend_deployment_name }}
+      labels:
+        app: {{ .Values.blue.labels.app }}
+        role: frontend
+        env: {{ .Values.blue.labels.env }}
+    spec:
+      containers:
+      - name: {{ .Values.blue.frontend_deployment_name }}
+        image: gcr.io/{{ .Values.project }}/{{ .Values.blue.image.name }}:{{ .Values.blue.image.tag }}
+        resources:
+          limits:
+            memory: {{ .Values.deployment.webapp_frontend.resources.limit.memory }}
+            cpu: {{ .Values.deployment.webapp_frontend.resources.limit.cpu }}
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.webapp_frontend.readinessProbe.path }}
+            port: {{ .Values.deployment.webapp_frontend.readinessProbe.port }}
+        env:
+        - name: COMPONENT
+          value: frontend
+        - name: BACKEND_URL
+          value: http://webapp-backend:8080/metadata
+        - name: VERSION
+          value: blue

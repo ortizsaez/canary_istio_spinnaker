@@ -3,16 +3,16 @@ kind: Service
 metadata:
   namespace: {{ .Values.namespace }}
   labels:
-    app: webapp-backend
-  name: webapp-backend
+    app: {{ .Values.name }}
+  name: {{ .Values.service.webapp_backend.name }}
 spec:
   ports:
-  - name: 8080-8080
-    port: 8080
+  - name: {{ .Values.service.webapp_backend.ports.webapp.name }}
+    port: {{ .Values.service.webapp_backend.ports.webapp.port }}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{ .Values.service.webapp_backend.ports.webapp.targetPort }}
   selector:
-    app: webapp
-    role: backend
+    app: {{ .Values.service.webapp_backend.selector.app }}
+    role: {{ .Values.service.webapp_backend.selector.role }}
   sessionAffinity: None
-  type: ClusterIP
+  type: {{ .Values.service.webapp_backend.type }}

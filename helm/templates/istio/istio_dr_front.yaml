@@ -2,16 +2,16 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule 
 metadata: 
   namespace: {{ .Values.namespace }}
-  name: webapp-frontend 
+  name: {{ .Values.service.webapp_frontend.name }}
 spec: 
-  host: webapp-frontend
+  host: {{ .Values.service.webapp_frontend.name }}
   trafficPolicy: 
     tls: 
       mode: ISTIO_MUTUAL 
   subsets: 
-    - name: {{ .Values.main.labels.env }} 
+    - name: {{ .Values.blue.labels.env }} 
       labels: 
-        env: {{ .Values.main.labels.env }}  
-    - name: {{ .Values.canary.labels.env }}  
+        env: {{ .Values.blue.labels.env }}  
+    - name: {{ .Values.green.labels.env }}  
       labels: 
-        env: {{ .Values.canary.labels.env }} 
+        env: {{ .Values.green.labels.env }} 

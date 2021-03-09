@@ -3,16 +3,16 @@ kind: Service
 metadata:
   namespace: {{ .Values.namespace }}
   labels:
-    app: webapp-frontend
-  name: webapp-frontend
+    app: {{ .Values.name }}
+  name: {{ .Values.service.webapp_frontend.name }}
 spec:
   ports:
-  - name: http
-    port: 80
+  - name: {{ .Values.service.webapp_frontend.ports.webapp.name }}
+    port: {{ .Values.service.webapp_frontend.ports.webapp.port }}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{ .Values.service.webapp_frontend.ports.webapp.targetPort }}
   selector:
-    app: webapp
-    role: frontend
+    app: {{ .Values.service.webapp_frontend.selector.app }}
+    role: {{ .Values.service.webapp_frontend.selector.role }}
   sessionAffinity: None
-  type: LoadBalancer
+  type: {{ .Values.service.webapp_frontend.type }}
