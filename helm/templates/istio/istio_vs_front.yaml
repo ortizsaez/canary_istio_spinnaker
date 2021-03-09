@@ -9,19 +9,37 @@ spec:
   gateways: 
   - {{ .Values.gateway.name }}
   http: 
-#  - match: 
-#    - uri: 
-#        exact: / 
+    # Fix each user that has seen blue to blue environment with cookie
     - route: 
-      - destination: 
+        - destination: 
+           host: {{ .Values.service.webapp_frontend.name }}
+           subset: {{ .Values.blue.labels.env }} 
+           port: 
+             number: {{ .Values.service.webapp_frontend.ports.webapp.port }} 
+      match: 
+        - headers:
+            cookie: 
+              regex: "^(.*?;)?(environment={{ .Values.blue.labels.env}})(;.*)?$" 
+    # Set a cookie for each environment to show new version from the first time in advance
+    - route: 
+      - headers:
+          response:
+            add:
+              set-cookie: environment={{ .Values.blue.labels.env}}
+        destination:
           host: {{ .Values.service.webapp_frontend.name }}
           port: 
             number: {{ .Values.service.webapp_frontend.ports.webapp.port }}
           subset: {{ .Values.blue.labels.env }}
-        weight: {{ sub 100 .Values.frontend_percentage_blue }}
-      - destination: 
+        weight: {{ .Values.frontend_percentage_blue }}
+
+      - headers:
+          response:
+            add: 
+              set-cookie: environment={{ .Values.green.labels.env}}
+        destination: 
           host: {{ .Values.service.webapp_frontend.name }}
           port: 
             number: {{ .Values.service.webapp_frontend.ports.webapp.port }}
           subset: {{ .Values.green.labels.env }}
-        weight: {{ .Values.frontend_percentage_blue }}
+        weight: {{ sub 100 .Values.frontend_percentage_blue }}
