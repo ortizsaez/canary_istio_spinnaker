@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3 
+kind: VirtualService 
+metadata: 
+  namespace: {{ .Values.namespace }}
+  name: webapp-frontend 
+spec: 
+  hosts: 
+  - "*" 
+  gateways: 
+  - webapp-gateway
+  http: 
+#  - match: 
+#    - uri: 
+#        exact: / 
+    - route: 
+      - destination: 
+          host: webapp-frontend
+          port: 
+            number: 80
+          subset: {{ .Values.main.labels.env }}
+        weight: {{ sub 100 .Values.frontend_percentage_canary }}
+      - destination: 
+          host: webapp-frontend
+          port: 
+            number: 80
+          subset: {{ .Values.canary.labels.env }}
+        weight: {{ .Values.frontend_percentage_canary }}

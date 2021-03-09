@@ -1,7 +1,8 @@
 name: webapp
 project: cicd-istio-spinnaker
 namespace: tst # This value will be overwritten by spinnaker to deploy in prod
-percentage_canary: 20 # This value will be overwritten by spinnaker to modify the %
+frontend_percentage_canary: 20 # This value will be overwritten by spinnaker to modify the %
+backend_percentage_canary: 50 # This value will be overwritten by spinnaker to modify the %
 canary:
   name: webapp-canary
   image:
