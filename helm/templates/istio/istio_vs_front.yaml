@@ -25,7 +25,7 @@ spec:
       - headers:
           response:
             add:
-              set-cookie: environment={{ .Values.blue.labels.env}}
+              set-cookie: environment={{ .Values.blue.labels.env}};max-age=86400
         destination:
           host: {{ .Values.service.webapp_frontend.name }}
           port: 
