@@ -31,7 +31,7 @@ spec:
           port: 
             number: {{ .Values.service.webapp_frontend.ports.webapp.port }}
           subset: {{ .Values.blue.labels.env }}
-        weight: {{ .Values.frontend_percentage_blue }}
+        weight: {{ .Values.percentage_blue }}
 
       - headers:
           response:
@@ -42,4 +42,4 @@ spec:
           port: 
             number: {{ .Values.service.webapp_frontend.ports.webapp.port }}
           subset: {{ .Values.green.labels.env }}
-        weight: {{ sub 100 .Values.frontend_percentage_blue }}
+        weight: {{ sub 100 .Values.percentage_blue }}

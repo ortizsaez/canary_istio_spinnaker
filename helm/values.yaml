@@ -1,8 +1,7 @@
 name: webapp
 project: cicd-istio-spinnaker
 namespace: tst # This value will be overwritten by spinnaker to deploy in prod
-frontend_percentage_blue: 20 # This value will be overwritten by spinnaker to modify the %
-backend_percentage_blue: 100 # This value will be overwritten by spinnaker to modify the %
+percentage_blue: 20 # This value will be overwritten by spinnaker to modify the %
 test_url: webapp-test.gke.com
 test_credential: webapp-test-credential
 prod_url: webapp.gke.com

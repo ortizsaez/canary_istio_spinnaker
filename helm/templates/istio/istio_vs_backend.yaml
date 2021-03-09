@@ -16,10 +16,10 @@ spec:
           port: 
             number: {{ .Values.service.webapp_backend.ports.webapp.port }}
           subset: {{ .Values.blue.labels.env }}
-        weight: {{ sub 100 .Values.backend_percentage_blue }}
+        weight: {{ sub 100 .Values.percentage_blue }}
       - destination: 
           host: {{ .Values.service.webapp_backend.name }}
           port: 
             number: {{ .Values.service.webapp_backend.ports.webapp.port }}
           subset: {{ .Values.green.labels.env }}
-        weight: {{ .Values.backend_percentage_blue }}
+        weight: {{ .Values.percentage_blue }}
